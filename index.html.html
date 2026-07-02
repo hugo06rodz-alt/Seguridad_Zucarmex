@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguridad Que Reconoce - Zucarmex</title>
+    <style>
+        :root {
+            --zucarmex-green: #006837; /* Verde oficial de las pirámides */
+            --zucarmex-dark: #1a1a1a;
+            --safety-orange: #dd6b20;
+            --bg-light: #f4f6f4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--zucarmex-dark);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-wrapper {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            padding-bottom: 20px;
+        }
+
+        /* Encabezado Corporativo */
+        .brand-header {
+            background: linear-gradient(135deg, #ffffff 0%, #f1fcf6 100%);
+            padding: 15px;
+            text-align: center;
+            border-bottom: 4px solid var(--zucarmex-green);
+        }
+
+        .logo-placeholder {
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: var(--zucarmex-dark);
+        }
+        .logo-placeholder span {
+            color: var(--zucarmex-green);
+        }
+
+        .project-title {
+            background: var(--zucarmex-green);
+            color: white;
+            text-align: center;
+            padding: 6px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* El Personaje Guía Integrado */
+        .inspector-guide {
+            display: flex;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            margin: 15px;
+            padding: 12px;
+            border-radius: 12px;
+            align-items: center;
+        }
+
+        .inspector-avatar {
+            font-size: 2.2rem;
+            background: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--zucarmex-green);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+        }
+
+        .inspector-bubble {
+            margin-left: 12px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #14532d;
+        }
+
+        /* Estilos del Formulario */
+        form {
+            padding: 0 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--zucarmex-green);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: var(--zucarmex-dark);
+            outline: none;
+            background-color: #fafafa;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--zucarmex-green);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(0, 104, 55, 0.1);
+        }
+
+        /* Selector de Tipo (Botón Grueso) */
+        .type-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .type-option {
+            flex: 1;
+            position: relative;
+            border: 2px solid #cbd5e0;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background: white;
+        }
+
+        .type-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .type-option input:checked + span {
+            color: var(--zucarmex-green);
+        }
+
+        .type-option:has(input:checked) {
+            border-color: var(--zucarmex-green);
+            background: #f0fdf4;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+        .row .form-group {
+            flex: 1;
+        }
+
+        /* Captura de Foto */
+        .camera-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #edf2f7;
+            border: 2px dashed #cbd5e0;
+            padding: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.95rem;
+            gap: 8px;
+        }
+
+        #imgPreview {
+            width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            margin-top: 10px;
+            display: none;
+            border-radius: 8px;
+            border: 1px solid #cbd5e0;
+        }
+
+        /* Botón Enviar */
+        .submit-btn {
+            width: 100%;
+            background: var(--zucarmex-green);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 104, 55, 0.2);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        #statusLoading {
+            display: none;
+            text-align: center;
+            font-weight: bold;
+            color: var(--zucarmex-green);
+            margin-top: 12px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-wrapper">
+    <div class="brand-header">
+        <div class="logo-placeholder">ZUCAR<span>MEX</span></div>
+    </div>
+    <div class="project-title">Seguridad Que Reconoce</div>
+
+    <!-- Guía interactivo del ingenio -->
+    <div class="inspector-guide">
+        <div class="inspector-avatar">👷‍♂️</div>
+        <div class="inspector-bubble">
+            <strong>¡Hola, compañero!</strong> Reporta aquí cualquier condición de riesgo en el ingenio para solucionarla de inmediato.
+        </div>
+    </div>
+
+    <form id="zucarmexForm">
+        <div class="form-group">
+            <label>Tipo de Reporte</label>
+            <div class="type-selector">
+                <label class="type-option">
+                    <input type="radio" name="tipo" value="Acto Inseguro" checked>
+                    <span>Acto Inseguro</span>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="tipo" value="Condición Insegura">
+                    <span>Condición Insegura</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nombre">Nombre del Trabajador</label>
+            <input type="text" id="nombre" required placeholder="Nombres y Apellidos">
+        </div>
+
+        <div class="form-group">
+            <label for="numero">Número de Trabajador</label>
+            <input type="number" id="numero" required placeholder="Ej. 10459">
+        </div>
+
+        <div class="form-group">
+            <label for="area">Área o Zona del Ingenio</label>
+            <select id="area" required>
+                <option value="" disabled selected>-- Selecciona el área --</option>
+                <option value="Batey A">Batey A</option>
+                <option value="Batey B">Batey B</option>
+                <option value="Molinos A">Molinos A</option>
+                <option value="Molinos B">Molinos B</option>
+                <option value="Calderas">Calderas</option>
+                <option value="Elaboración">Elaboración</option>
+                <option value="Cristalización">Cristalización</option>
+                <option value="Evaporación">Evaporación</option>
+                <option value="Filtros Oliver">Filtros Oliver</option>
+                <option value="Taller Maquinaria">Taller Maquinaria</option>
+                <option value="Taller Mecánico">Taller Mecánico</option>
+                <option value="Secadores">Secadores</option>
+                <option value="Envase">Envase</option>
+                <option value="Bodega">Bodega</option>
+                <option value="Planta Eléctrica">Planta Eléctrica</option>
+                <option value="Tratamiento de aguas">Tratamiento de aguas</option>
+                <option value="Control Ambiental">Control Ambiental</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="form-group">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" required>
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora</label>
+                <input type="time" id="hora" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción del Hallazgo</label>
+            <textarea id="descripcion" rows="3" required placeholder="Describe detalladamente la situación detectada..."></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Evidencia Fotográfica</label>
+            <label for="fotoInput" class="camera-btn">📸 Tomar Foto en Planta</label>
+            <input type="file" id="fotoInput" accept="image/*" capture="environment" style="display:none;" required>
+            <img id="imgPreview" alt="Evidencia Zucarmex">
+        </div>
+
+        <button type="submit" class="submit-btn" id="btnSubmit">Enviar Reporte Seguro</button>
+        <div id="statusLoading">Subiendo evidencia al servidor de seguridad...</div>
+    </form>
+</div>
+
+<script>
+    // Configuración de valores de tiempo actuales por defecto
+    const tiempoLocal = new Date();
+    document.getElementById('fecha').value = tiempoLocal.toISOString().split('T')[0];
+    document.getElementById('hora').value = tiempoLocal.toTimeString().split(' ')[0].substring(0,5);
+
+    const fotoInput = document.getElementById('fotoInput');
+    const imgPreview = document.getElementById('imgPreview');
+    let base64ImgData = "";
+
+    // Evento para procesar la fotografía tomada y convertirla a formato de transmisión
+    fotoInput.addEventListener('change', function(e) {
+        const archivo = e.target.files[0];
+        if (archivo) {
+            const lector = new FileReader();
+            lector.onload = function(evt) {
+                imgPreview.src = evt.target.result;
+                imgPreview.style.display = 'block';
+                base64ImgData = evt.target.result.split(',')[1];
+            };
+            lector.readAsDataURL(archivo);
+        }
+    });
+
+    // Envío del formulario al Google Web App
+    document.getElementById('zucarmexForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // PEGA AQUÍ LA URL QUE TE DIO GOOGLE APPS SCRIPT AL PUBLICAR:
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbzj7U5zft7xRoIHZNiZHrPtSBd1mgzUmjWn6pV6r9lkjA7WowxHkay7V876v3XOOulVFQ/exec";
+        
+        const btn = document.getElementById('btnSubmit');
+        const loading = document.getElementById('statusLoading');
+        
+        btn.disabled = true;
+        loading.style.display = 'block';
+
+        const dataPayload = {
+            tipo: document.querySelector('input[name="tipo"]:checked').value,
+            nombre: document.getElementById('nombre').value,
+            numero: document.getElementById('numero').value,
+            area: document.getElementById('area').value,
+            fecha: document.getElementById('fecha').value,
+            hora: document.getElementById('hora').value,
+            descripcion: document.getElementById('descripcion').value,
+            fotoBase64: base64ImgData,
+            fotoName: "SR_" + document.getElementById('numero').value + "_" + Date.now() + ".jpg"
+        };
+
+        fetch(scriptUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dataPayload)
+        })
+        .then(() => {
+            alert("¡Reporte guardado con éxito en el sistema de seguridad!");
+            document.getElementById('zucarmexForm').reset();
+            imgPreview.style.display = 'none';
+            base64ImgData = "";
+            btn.disabled = false;
+            loading.style.display = 'none';
+        })
+        .catch(err => {
+            alert("Error de conexión. Inténtalo de nuevo.");
+            console.error(err);
+            btn.disabled = false;
+            loading.style.display = 'none';
+        });
+    });
+</script>
+</body>
+</html>
